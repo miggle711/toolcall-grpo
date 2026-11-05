@@ -1,0 +1,19 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+envs/
+.pytest_cache/
+
+# large artifacts stay on scratch
+hf-cache/
+data/
+runs/
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+
+# secrets
+.env
+*.token

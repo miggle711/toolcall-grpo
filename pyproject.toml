@@ -1,0 +1,17 @@
+[project]
+name = "toolcall-grpo"
+version = "0.0.1"
+description = "GRPO for tool calling with a rule based reward"
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
