@@ -1,0 +1,5 @@
+examples: 169
+mean reward: 0.772 -> 0.790
+mean change: +0.018  (95% bootstrap interval +0.003 to +0.037)
+exact match: 0.533 -> 0.556
+better 6, worse 2, same 161

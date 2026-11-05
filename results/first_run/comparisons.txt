@@ -1,0 +1,42 @@
+== GPU control, same untrained model (A40 vs A16)
+examples: 152
+mean reward: 0.731 -> 0.728
+mean change: -0.003  (95% bootstrap interval -0.008 to +0.000)
+exact match: 0.461 -> 0.461
+better 0, worse 2, same 150
+
+== trained vs untrained
+examples: 152
+mean reward: 0.728 -> 0.735
+mean change: +0.007  (95% bootstrap interval -0.005 to +0.019)
+exact match: 0.461 -> 0.474
+better 9, worse 8, same 135
+
+== hint alone vs untrained
+examples: 152
+mean reward: 0.728 -> 0.733
+mean change: +0.004  (95% bootstrap interval -0.005 to +0.016)
+exact match: 0.461 -> 0.461
+better 4, worse 3, same 145
+
+== trained + hint vs untrained
+examples: 152
+mean reward: 0.728 -> 0.753
+mean change: +0.025  (95% bootstrap interval +0.005 to +0.046)
+exact match: 0.461 -> 0.487
+better 18, worse 11, same 123
+
+== trained + hint vs hint alone
+examples: 152
+mean reward: 0.733 -> 0.753
+mean change: +0.020  (95% bootstrap interval +0.004 to +0.038)
+exact match: 0.461 -> 0.487
+better 14, worse 8, same 130
+
+== trained vs trained + hint
+examples: 152
+mean reward: 0.735 -> 0.753
+mean change: +0.018  (95% bootstrap interval +0.001 to +0.036)
+exact match: 0.474 -> 0.487
+better 10, worse 5, same 137
+

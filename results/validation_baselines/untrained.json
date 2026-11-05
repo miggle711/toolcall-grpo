@@ -1,0 +1,24 @@
+{
+  "n": 169,
+  "mean_reward": 0.7722796156834618,
+  "exact_match": 0.5325443786982249,
+  "well_formed": 0.9881656804733728,
+  "name_recall": 0.9475673898750822,
+  "by_number_of_gold_calls": {
+    "1 call": {
+      "n": 68,
+      "mean_reward": 0.7257107843137255
+    },
+    "2 calls": {
+      "n": 43,
+      "mean_reward": 0.7555910852713178
+    },
+    "3+ calls": {
+      "n": 58,
+      "mean_reward": 0.8392500870776732
+    }
+  },
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "adapter": null,
+  "hint": null
+}

@@ -1,0 +1,24 @@
+{
+  "n": 152,
+  "mean_reward": 0.7352978801169591,
+  "exact_match": 0.47368421052631576,
+  "well_formed": 0.993421052631579,
+  "name_recall": 0.9572368421052632,
+  "by_number_of_gold_calls": {
+    "1 call": {
+      "n": 68,
+      "mean_reward": 0.6205453431372548
+    },
+    "2 calls": {
+      "n": 34,
+      "mean_reward": 0.8014950980392157
+    },
+    "3+ calls": {
+      "n": 50,
+      "mean_reward": 0.8463472222222223
+    }
+  },
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "adapter": "runs/grpo_1p5b/final",
+  "hint": null
+}

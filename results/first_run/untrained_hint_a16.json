@@ -1,0 +1,24 @@
+{
+  "n": 152,
+  "mean_reward": 0.7326690423976608,
+  "exact_match": 0.4605263157894737,
+  "well_formed": 0.9868421052631579,
+  "name_recall": 0.9605263157894737,
+  "by_number_of_gold_calls": {
+    "1 call": {
+      "n": 68,
+      "mean_reward": 0.6139889705882353
+    },
+    "2 calls": {
+      "n": 34,
+      "mean_reward": 0.8017156862745098
+    },
+    "3+ calls": {
+      "n": 50,
+      "mean_reward": 0.8471222222222222
+    }
+  },
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "adapter": null,
+  "hint": "Only call functions whose inputs you already have. If a call needs the result of another call, do not make it yet."
+}
