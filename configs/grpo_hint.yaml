@@ -1,0 +1,39 @@
+# Second experiment. The first run (grpo_1p5b) changed the model very little, and only training plus a
+# prompt hint showed a gain. This run trains WITH the hint in every prompt, so the model learns to follow
+# the instruction instead of having to infer a hidden rule from the reward alone.
+# Three things differ from grpo_1p5b: the hint, 4 prompts per step instead of 2, and a training file
+# that excludes the validation split. Judge it on val first and look at the test set once at the end.
+model: Qwen/Qwen2.5-1.5B-Instruct
+print_completions: false
+train_file: train_fit.jsonl
+train_hint: true
+
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+grpo:
+  # rewards: [format_reward, call_reward]
+  reward_weights: [0.1, 0.9]
+  num_generations: 8
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 8  # generation batch of 32 = 4 prompts x 8 completions per step
+  max_completion_length: 640
+  learning_rate: 2.0e-5
+  beta: 0.0
+  temperature: 1.0
+  max_steps: 300  # 1200 prompt samples, about 1.5 passes over the 768 training examples
+  save_steps: 50
+  save_total_limit: 8  # keep every checkpoint this time
+  logging_steps: 1
+  bf16: true
+  gradient_checkpointing: true
+  use_vllm: true
+  vllm_mode: colocate
+  vllm_gpu_memory_utilization: 0.3
+  vllm_max_model_length: 2400  # longest prompt plus the hint, plus 640 of completion
+  log_completions: true  # saved as parquet files in the output directory
+  report_to: tensorboard
+  seed: 0
