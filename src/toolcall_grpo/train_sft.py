@@ -36,6 +36,7 @@ def main() -> None:
     ap.add_argument("--config", required=True)
     ap.add_argument("--output-dir", required=True)
     ap.add_argument("--data-dir", required=True)
+    ap.add_argument("--max-steps", type=int, default=None, help="override sft.max_steps, for short probe runs")
     args = ap.parse_args()
 
     from datasets import Dataset
@@ -46,6 +47,8 @@ def main() -> None:
     from toolcall_grpo.train import report_peak_gpu_memory
 
     cfg = yaml.safe_load(open(args.config))
+    if args.max_steps is not None:
+        cfg["sft"]["max_steps"] = args.max_steps
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
     train = Dataset.from_list(
