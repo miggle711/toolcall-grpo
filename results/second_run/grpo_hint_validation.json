@@ -1,0 +1,24 @@
+{
+  "n": 169,
+  "mean_reward": 0.8000212330404638,
+  "exact_match": 0.5739644970414202,
+  "well_formed": 0.9940828402366864,
+  "name_recall": 0.9640039447731755,
+  "by_number_of_gold_calls": {
+    "1 call": {
+      "n": 68,
+      "mean_reward": 0.7931127450980392
+    },
+    "2 calls": {
+      "n": 43,
+      "mean_reward": 0.7565600775193798
+    },
+    "3+ calls": {
+      "n": 58,
+      "mean_reward": 0.8403420411006618
+    }
+  },
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "adapter": "runs/grpo_hint/final",
+  "hint": "Only call functions whose inputs you already have. If a call needs the result of another call, do not make it yet."
+}

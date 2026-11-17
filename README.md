@@ -2,7 +2,7 @@
 
 Teach a small open model to call functions correctly using GRPO, with a reward computed by code.
 
-Status: one experiment finished with no clear gain from training alone, a second is running. See Results below.
+Status: two experiments finished. SFT clearly beats GRPO on this reward and this data. See Results below.
 
 ## Question
 
@@ -80,8 +80,30 @@ Of the 82 failures of the untrained model, 40 call more functions than the gold 
 - 793 of the 1,893 rows in the source file are dropped because their gold labels put the function name inside the arguments.
 - An evaluation of the step-200 checkpoint failed because older checkpoints had been deleted. The second experiment keeps them.
 
-### Second experiment (running)
+### Second experiment: SFT baseline added, GRPO with the hint in training
 
-Train with the hint in every training prompt, 4 prompts per step, on a training file that excludes a validation split. Tuning is judged on the validation split and the test set is looked at once at the end.
+Train with the hint in every training prompt, 4 prompts per step, on a training file that excludes a validation split. Tuning is judged on the validation split and the test set is looked at once at the end. Same model, same LoRA settings, same 937 training examples as experiment 1 (minus the validation split, 768 remaining). A supervised fine tuning run (sft_1p5b) was added as a non RL comparison point, trained on the identical examples. Both scored on the same 152 example test set and the 169 example validation split used throughout. Raw numbers are in `results/`.
 
 Reference numbers on the 169 validation examples, for the untrained model: mean reward 0.772 and exact match 53.3%, and with the hint 0.790 and 55.6% (`results/validation_baselines/`).
+
+| Run | Split | Mean reward | Exact match |
+| --- | --- | --- | --- |
+| GRPO + hint (train and eval) | test | 0.740 | 46.7% |
+| GRPO + hint (train and eval) | validation | 0.800 | 57.4% |
+| SFT, no hint | test | 0.802 | 57.9% |
+| SFT, no hint | validation | 0.817 | 59.8% |
+| SFT + hint at eval | validation | 0.797 | 58.6% |
+
+Paired comparison on the mean reward (`python -m toolcall_grpo.compare`):
+
+SFT vs untrained, test: +0.070, interval +0.034 to +0.108.
+SFT vs GRPO + hint, test: +0.062, interval +0.027 to +0.099.
+SFT + hint vs SFT alone, validation: -0.020, interval -0.044 to +0.003.
+
+Reading: SFT on the same 768 examples clearly beats both the untrained model and GRPO with the hint baked into training, by a margin experiment 1 never reached. Both intervals exclude zero by a comfortable margin. Adding the hint to SFT's own eval prompts does not help and may hurt slightly, the interval barely includes zero and the point estimate goes the wrong way. Where experiment 1 struggled to find any trustworthy effect, this one gives a clear ranking: SFT beats GRPO + hint, which is about the same as GRPO alone and the untrained model.
+
+### Limits (second experiment)
+
+SFT was not evaluated with the hint on the test set, only on validation.
+One training run per condition, as in experiment 1.
+This shows SFT beats this GRPO setup on this reward and this data. It does not show GRPO cannot ever help a 1.5B tool calling model, only that a straightforward reward and a modest compute budget did not make it beat plain SFT here.

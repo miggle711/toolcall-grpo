@@ -1,0 +1,20 @@
+== SFT vs untrained (test)
+examples: 152
+mean reward: 0.731 -> 0.802
+mean change: +0.070  (95% bootstrap interval +0.034 to +0.108)
+exact match: 0.461 -> 0.579
+better 31, worse 12, same 109
+
+== SFT vs GRPO + hint (test)
+examples: 152
+mean reward: 0.740 -> 0.802
+mean change: +0.062  (95% bootstrap interval +0.027 to +0.099)
+exact match: 0.467 -> 0.579
+better 27, worse 11, same 114
+
+== SFT + hint vs SFT alone (validation)
+examples: 169
+mean reward: 0.817 -> 0.797
+mean change: -0.020  (95% bootstrap interval -0.044 to +0.003)
+exact match: 0.598 -> 0.586
+better 10, worse 19, same 140
