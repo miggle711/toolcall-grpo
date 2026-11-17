@@ -2,6 +2,7 @@
 # GRPO training on one A40 (desktopq allows one GPU per user). Compute nodes have no internet.
 # Submit from the project scratch directory, giving a config. Anything after the config goes to the trainer.
 #   cd $BASE && sbatch --time=00:45:00 code/scripts/train.slurm configs/smoke.yaml
+# The SFT baseline uses the same script: MODULE=toolcall_grpo.train_sft RUN_NAME=sft_1p5b sbatch --export=ALL code/scripts/train.slurm configs/sft/sft_1p5b.yaml
 # A short probe of a real config, in its own output directory so it cannot be mistaken for the real run:
 #   cd $BASE && RUN_NAME=probe sbatch --export=ALL --time=00:30:00 code/scripts/train.slurm configs/grpo_1p5b.yaml --max-steps 20
 #SBATCH --job-name=tc-train
@@ -52,7 +53,7 @@ report_peak() {
 }
 trap report_peak EXIT
 
-python -m toolcall_grpo.train \
+python -m "${MODULE:-toolcall_grpo.train}" \
     --config "$BASE/code/$CONFIG" \
     --data-dir "$BASE/data" \
     --output-dir "$OUT" \
