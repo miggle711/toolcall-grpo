@@ -18,3 +18,10 @@ mean reward: 0.817 -> 0.797
 mean change: -0.020  (95% bootstrap interval -0.044 to +0.003)
 exact match: 0.598 -> 0.586
 better 10, worse 19, same 140
+
+== SFT + hint vs SFT alone (test)
+examples: 152
+mean reward: 0.802 -> 0.808
+mean change: +0.006  (95% bootstrap interval -0.023 to +0.035)
+exact match: 0.579 -> 0.592
+better 15, worse 13, same 124

@@ -92,6 +92,7 @@ Reference numbers on the 169 validation examples, for the untrained model: mean 
 | GRPO + hint (train and eval) | validation | 0.800 | 57.4% |
 | SFT, no hint | test | 0.802 | 57.9% |
 | SFT, no hint | validation | 0.817 | 59.8% |
+| SFT + hint at eval | test | 0.808 | 59.2% |
 | SFT + hint at eval | validation | 0.797 | 58.6% |
 
 Paired comparison on the mean reward (`python -m toolcall_grpo.compare`):
@@ -99,11 +100,11 @@ Paired comparison on the mean reward (`python -m toolcall_grpo.compare`):
 SFT vs untrained, test: +0.070, interval +0.034 to +0.108.
 SFT vs GRPO + hint, test: +0.062, interval +0.027 to +0.099.
 SFT + hint vs SFT alone, validation: -0.020, interval -0.044 to +0.003.
+SFT + hint vs SFT alone, test: +0.006, interval -0.023 to +0.035.
 
-Reading: SFT on the same 768 examples clearly beats both the untrained model and GRPO with the hint baked into training, by a margin experiment 1 never reached. Both intervals exclude zero by a comfortable margin. Adding the hint to SFT's own eval prompts does not help and may hurt slightly, the interval barely includes zero and the point estimate goes the wrong way. Where experiment 1 struggled to find any trustworthy effect, this one gives a clear ranking: SFT beats GRPO + hint, which is about the same as GRPO alone and the untrained model.
+Reading: SFT on the same 768 examples clearly beats both the untrained model and GRPO with the hint baked into training, by a margin experiment 1 never reached. Both intervals exclude zero by a comfortable margin. Adding the hint to SFT's own eval prompts does not reliably help or hurt: the test-set interval sits almost exactly on zero, and the validation interval goes the other way but also barely excludes it. Where experiment 1 struggled to find any trustworthy effect, this one gives a clear ranking: SFT beats GRPO + hint, which is about the same as GRPO alone and the untrained model. The hint itself is not doing real work once SFT is used.
 
 ### Limits (second experiment)
 
-SFT was not evaluated with the hint on the test set, only on validation.
 One training run per condition, as in experiment 1.
 This shows SFT beats this GRPO setup on this reward and this data. It does not show GRPO cannot ever help a 1.5B tool calling model, only that a straightforward reward and a modest compute budget did not make it beat plain SFT here.
